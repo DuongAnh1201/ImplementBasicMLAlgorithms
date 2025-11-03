@@ -6,8 +6,12 @@ def Batch_Gradient_Descent(o, x, y, learning_rate = 0.05):
     error = y - hypothesis
     gradient = np.dot(np.transpose(x),error)
     o = o + learning_rate*gradient
-    loss = np.mean(error**2)
+    loss = np.sum(error**2)
     return hypothesis,o,loss
+
+# def Stochastic_Gradient_Descent(o,x,y, learning_rate = 0.05):
+
+
 def main():
     x = np.array([[1, 2], [2, 1]])  # 2 samples, 2 features
     y = np.array([5, 6])             # 2 target values
@@ -31,8 +35,8 @@ def main():
     plt.figure(figsize=(10,6))
     plt.plot(epochs, losses, 'b-', linewidth=2)
     plt.xlabel('Epoch', fontsize=12)
-    plt.ylabel('Loss (MSE)', fontsize=12)
-    plt.title('Training Loss over Epochs', fontsize=14, fontweight='bold')
+    plt.ylabel('Loss (LSE)', fontsize=12)
+    plt.title('Training Loss over Epochs (Least Square Error)', fontsize=14, fontweight='bold')
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.show()
