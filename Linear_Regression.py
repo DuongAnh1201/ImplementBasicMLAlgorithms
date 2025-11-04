@@ -9,11 +9,17 @@ def Batch_Gradient_Descent(o, x, y, learning_rate = 0.05):
     loss = np.sum(error**2)
     return hypothesis,o,loss
 
-# def Stochastic_Gradient_Descent(o,x,y, learning_rate = 0.05):
+def Stochastic_Gradient_Descent(o,x,y, learning_rate = 0.05): 
+    hypothesis = np.dot(x,o) 
+    error = y - hypothesis
+    for i in range(len(o)):
+        for e in range(len(error)):
+            o[i] = o[i] + learning_rate*x[e][i]*error[e]
+    return o
 
 
 def main():
-    x = np.array([[1, 2], [2, 1]])  # 2 samples, 2 features
+    x = np.array([[1, 2], [3, 1]])  # 2 samples, 2 features
     y = np.array([5, 6])             # 2 target values
     o = np.array([2, 1])             # Initial parameters (theta)
     losses = []
