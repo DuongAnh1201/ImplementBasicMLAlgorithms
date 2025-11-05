@@ -6,16 +6,20 @@ def Batch_Gradient_Descent(o, x, y, learning_rate = 0.05):
     error = y - hypothesis
     gradient = np.dot(np.transpose(x),error)
     o = o + learning_rate*gradient
-    loss = np.sum(error**2)
+    loss = 0.5*np.sum(error**2)
     return hypothesis,o,loss
 
-def Stochastic_Gradient_Descent(o,x,y, learning_rate = 0.05): 
+def Stochastic_Gradient_Descent(o,x,y, learning_rate = 0.05):  #For input 2d matrix only.
     hypothesis = np.dot(x,o) 
     error = y - hypothesis
+    losses = []
     for i in range(len(o)):
         for e in range(len(error)):
             o[i] = o[i] + learning_rate*x[e][i]*error[e]
-    return o
+        loss = 0.5*np.sum((y - hypothesis)**2)  
+        # assuming MSE as your loss function
+        losses.append(loss)
+    return hypothesis, o
 
 
 def main():
