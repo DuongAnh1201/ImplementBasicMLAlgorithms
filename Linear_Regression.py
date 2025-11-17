@@ -21,6 +21,27 @@ def Stochastic_Gradient_Descent(o,x,y, learning_rate = 0.05):  #For input 2d mat
         losses.append(loss)
     return hypothesis, o
 
+def Stochastic_Gradient(o,x,y, learning_rate = 0.05): #for any input matrix
+    # Process each sample one at a time (stochastic)
+    for i in range(len(x)):
+        # Get single sample
+        x_sample = x[i]
+        y_sample = y[i]
+        
+        # Compute hypothesis and error for this sample
+        hypothesis_sample = np.dot(x_sample, o)
+        error_sample = y_sample - hypothesis_sample
+        
+        # Update parameters using gradient from this single sample
+        gradient = x_sample * error_sample
+        o = o + learning_rate * gradient
+    
+    # Compute final hypothesis and loss for all samples
+    hypothesis = np.dot(x, o)
+    error = y - hypothesis
+    loss = 0.5 * np.sum(error**2)
+    
+    return hypothesis, o, loss
 
 def main():
     x = np.array([[1, 2], [3, 1]])  # 2 samples, 2 features
@@ -56,7 +77,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    
-
-
